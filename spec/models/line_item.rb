@@ -1,0 +1,3 @@
+describe LineItem do
+
+end
