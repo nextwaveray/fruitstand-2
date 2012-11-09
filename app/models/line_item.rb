@@ -2,14 +2,20 @@ class LineItem < ActiveRecord::Base
 
   attr_accessible :price, :product, :quantity
 
-  belongs_to :cart
+  belongs_to :itemable, polymorphic: true
   belongs_to :product
 
 
   before_create :save_price
 
+  monetize :total_cents, allow_nil: true
+
   def total_cents
     price.present? ? quantity * price : 0
+  end
+
+  def price_to_s
+    sprintf('%.2f', price / 100.0)
   end
 
   private
@@ -17,5 +23,6 @@ class LineItem < ActiveRecord::Base
     def save_price
       self.price = product.price
     end
+
 
 end

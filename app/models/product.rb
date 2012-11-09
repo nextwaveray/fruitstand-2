@@ -15,4 +15,8 @@ class Product < ActiveRecord::Base
   validates_numericality_of :price
   validates_uniqueness_of :name
 
+  def price_to_s
+    price / 100
+
+  end
 end

@@ -1,0 +1,19 @@
+<%= link_to "Cart has #{@cart.line_items.size} item(s)", cart_path %>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Tasks</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @products.each do |product| %>
+  <tr>
+    <td><%= product.name.capitalize %></td>
+    <td>$<%= sprintf('%.2f', product.price / 100.0) %></td>
+    <td><%= link_to "Add To Cart", add_item_cart_path(product.id), :method => :post, class: 'btn btn-primary' %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>

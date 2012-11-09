@@ -1,0 +1,29 @@
+<%= link_to "Continue Shopping", root_path %>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<% @cart.line_items.each do |line_item| %>
+  <tr>
+    <td><%= line_item.product.name %></td>
+    <td>$<%= line_item.price_to_s %></td>
+    <td><%= line_item.quantity %></td>
+    <td>$<%= line_item.total %></td>
+    <td><%= link_to "Remove Item", remove_item_cart_path(line_item.id), :method => :post, confirm: "Are you sure?", class: 'btn btn-danger' %></td>
+  </tr>
+<% end %>
+  <tr>
+    <td colspan='3' style='text-align: right'><strong>Cart Total is:</strong></td>
+    <td> $<%= @cart.total %></td>
+    <td>&nbsp;</td>
+  </tr>
+</tbody>
+</table>
+<p><%= link_to "Checkout", checkout_cart_path, :method => :post %></p>
